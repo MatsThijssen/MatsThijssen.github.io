@@ -12,7 +12,12 @@ import {
   Typography,
 } from "@mui/material";
 import { useState } from "react";
-import { createLetter, generateRandomLetter, Letter } from "./letter";
+import {
+  createLetter,
+  generate16LettersFromDice,
+  generateRandomLetter,
+  Letter,
+} from "./letter";
 
 export interface Indexes {
   x: number;
@@ -46,12 +51,15 @@ export function Boggle() {
    */
   const resetMatrix = () => {
     const newLetterMatrix = new Array(4);
+    const lettersFromDice = generate16LettersFromDice();
+    let letterIndex = 0;
     for (let i = 0; i < 4; i++) {
       for (let j = 0; j < 4; j++) {
         if (j === 0) {
           newLetterMatrix[i] = new Array(4);
         }
-        newLetterMatrix[i][j] = generateRandomLetter();
+        newLetterMatrix[i][j] = lettersFromDice[letterIndex];
+        letterIndex++;
       }
     }
     setLetterMatrix(newLetterMatrix);
@@ -216,7 +224,7 @@ export function Boggle() {
       <Grid2
         container
         spacing={1.5}
-        sx={{ backgroundColor: "white", width: "35rem" }}
+        sx={{ backgroundColor: "white", width: "35rem", height: "35rem" }}
       >
         {letterMatrix.flat().map((l) => createLetter(l))}
       </Grid2>

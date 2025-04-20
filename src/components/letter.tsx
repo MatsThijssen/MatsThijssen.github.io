@@ -73,3 +73,40 @@ export function generateRandomLetter(): Letter {
     color: "bisque",
   };
 }
+
+export function generate16LettersFromDice(): Letter[] {
+  // The official game dice
+  const dice = [
+    ["A", "E", "A", "N", "E", "G"],
+    ["A", "H", "S", "P", "C", "O"],
+    ["A", "S", "P", "F", "F", "K"],
+    ["O", "B", "J", "O", "A", "B"],
+    ["I", "O", "T", "M", "U", "C"],
+    ["R", "Y", "V", "D", "E", "L"],
+    ["L", "R", "E", "I", "X", "D"],
+    ["E", "I", "U", "N", "E", "S"],
+    ["W", "N", "G", "E", "E", "H"],
+    ["L", "N", "H", "N", "R", "Z"],
+    ["T", "S", "T", "I", "Y", "D"],
+    ["O", "W", "T", "O", "A", "T"],
+    ["E", "R", "T", "T", "Y", "L"],
+    ["T", "O", "E", "S", "S", "I"],
+    ["T", "E", "R", "W", "H", "V"],
+    ["N", "U", "I", "H", "M", "QU"],
+  ];
+
+  const letters = dice.map((die) => ({
+    color: "bisque",
+    value: die[Math.floor(Math.random() * die.length)],
+  }));
+
+  shuffleArray(letters);
+  return letters;
+}
+
+function shuffleArray(array: unknown[]) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+}
