@@ -1,7 +1,7 @@
 {
   "name": "boggle-app",
   "version": "0.1.0",
-  "homepage": "https://matsthijssen.github.io/boggle-app",
+  "homepage": "https://matsthijssen.github.io",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.13.3",
