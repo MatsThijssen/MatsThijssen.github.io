@@ -35,22 +35,15 @@ const initLetterMatrix: Letter[][] = [
   [{}, {}, {}, {}],
 ];
 
-const GREENS = [
-  "#c7e9c0",
-  "#a1d99b",
-  "#74c476",
-  "#41ab5d",
-  "#238b45",
-  "#006d2c",
-  "#00441b",
-];
-
 export function Boggle() {
   const [letterMatrix, setLetterMatrix] = useState(initLetterMatrix);
   const [wordDefs, setWordDef] = useState<string[]>([]);
   const [inputWord, setInputWord] = useState<string | undefined>(undefined);
   const [didSubmit, setDidSubmit] = useState(false);
 
+  /**
+   * Resets the board with random letters
+   */
   const resetMatrix = () => {
     const newLetterMatrix = new Array(4);
     for (let i = 0; i < 4; i++) {
@@ -64,7 +57,10 @@ export function Boggle() {
     setLetterMatrix(newLetterMatrix);
   };
 
-  // Returns all coords of neighbors with the desired char
+  /**
+   * Returns a list of Indexes for the `phrase` that was searched for, starting at
+   * `index` of the phrase, given index 0 of the phrase is at supplied (x, y)
+   */
   const searchNeighbors = (
     x: number,
     y: number,
@@ -121,6 +117,10 @@ export function Boggle() {
     return false;
   };
 
+  /**
+   * Looks for a supplied phrase on the board.
+   * If found, adds colors and arrows to the letters
+   */
   const lookForMatch = (phrase: string) => {
     // Reset color and input-word
     colorMatrix([]);
@@ -154,6 +154,10 @@ export function Boggle() {
     });
   };
 
+  /**
+   * Colors the letters in the supplied indexes and adds arrows between
+   * subsequent indexes
+   */
   const colorMatrix = (indexes: Indexes[]) => {
     console.log(indexes);
     for (const row of letterMatrix) {
@@ -165,10 +169,8 @@ export function Boggle() {
     for (let i = 0; i < indexes.length; i += 1) {
       const index = indexes[i];
       const nextIndex = indexes.at(i + 1);
-      // letterMatrix[index.x][index.y].color = GREENS[greenIndex];
-      // if (greenIndex < GREENS.length - 1) greenIndex += 1;
       if (i === 0) {
-        letterMatrix[index.x][index.y].color = GREENS.at(-3);
+        letterMatrix[index.x][index.y].color = "#238b45";
       }
 
       if (nextIndex) {
@@ -180,10 +182,13 @@ export function Boggle() {
     }
     const newLetterMatrix = letterMatrix.slice();
 
-    console.log(newLetterMatrix);
     setLetterMatrix(newLetterMatrix);
   };
 
+  /**
+   * Looks up word stored in `inputWord` on Merriam-Webster and sets the
+   * `wordInfo` state with a list of short definitions if the word is found
+   */
   const checkWordOnMW = async () => {
     setWordDef([]);
 
@@ -204,7 +209,6 @@ export function Boggle() {
     }
 
     setWordDef(wordInfo.map((info) => info?.shortdef?.[0]).filter((v) => !!v));
-    // return wordInfo.map((info) => info.shortDef).flat();
   };
 
   return (
