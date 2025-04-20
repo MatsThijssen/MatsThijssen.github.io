@@ -12,15 +12,9 @@ import {
   Typography,
 } from "@mui/material";
 import { useState } from "react";
-import EastIcon from "@mui/icons-material/East";
+import { createLetter, generateRandomLetter, Letter } from "./letter";
 
-interface Letter {
-  value?: string;
-  color?: string;
-  arrowTo?: Indexes;
-}
-
-interface Indexes {
+export interface Indexes {
   x: number;
   y: number;
 }
@@ -33,66 +27,6 @@ function indexDifference(a: Indexes, b: Indexes): Indexes {
 }
 
 const MW_API_KEY = "cdac013a-753e-4801-81c0-e93119ab170c";
-
-function createLetter(letter: Letter) {
-  return (
-    <Grid2 size={{ xs: 3 }}>
-      <Box
-        sx={{
-          borderRadius: 5,
-          borderColor: "white",
-          backgroundColor: "burlywood",
-          boxShadow: `0px 0px 7px 12px inset ${letter.color ?? "black"}`,
-          height: "8rem",
-          width: "8rem",
-          textAlign: "center",
-          verticalAlign: "middle",
-          lineHeight: "8rem",
-          fontSize: "5rem",
-          position: "relative",
-          //   alignContent: "center",
-        }}
-      >
-        {(letter?.value === "QU" ? "Qu" : letter.value) ?? ""}
-        {letter.arrowTo && (
-          <EastIcon
-            fontSize="large"
-            sx={{
-              color: "navy",
-              position: "absolute",
-              minWidth: "5rem",
-              minHeight: "5rem",
-              top: `${1.5 - letter.arrowTo.x * 4.5}rem`,
-              right: `${1.5 + letter.arrowTo.y * 4.5}rem`,
-              zIndex: "999",
-              rotate: `${arrowRotation(letter.arrowTo.x, letter.arrowTo.y)}deg`,
-            }}
-          />
-        )}
-      </Box>
-    </Grid2>
-  );
-}
-
-function arrowRotation(x: number, y: number) {
-  let rotation = y === 1 ? 180 : 0;
-  rotation -= (Math.sign(-y || 1) * x * 90) / (Math.abs(x) + Math.abs(y));
-  return rotation;
-}
-
-// TODO: Pick without replacement
-function generateRandomLetter(): Letter {
-  const characters = "AAABCCCDEEEEFGHIIIJKKLLMNNNOOOOPQRSSSTTUUUVWXYZ";
-
-  const randomIndex = Math.floor(Math.random() * characters.length);
-  let char = characters.charAt(randomIndex);
-  if (char === "Q") char += "U";
-
-  return {
-    value: char,
-    color: "bisque",
-  };
-}
 
 const initLetterMatrix: Letter[][] = [
   [{}, {}, {}, {}],
