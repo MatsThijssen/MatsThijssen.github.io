@@ -1,4 +1,4 @@
-import { Box, Grid2 } from "@mui/material";
+import { Box, Grid2, Typography } from "@mui/material";
 import { Indexes } from "./game";
 import EastIcon from "@mui/icons-material/East";
 
@@ -26,7 +26,7 @@ export function createLetter(letter: Letter) {
           borderRadius: 5,
           borderColor: "white",
           backgroundColor: "burlywood",
-          boxShadow: `0px 0px 7px 12px inset ${letter.color ?? "black"}`,
+          boxShadow: `0px 0px 7px 12px inset ${letter.color ?? "bisque"}`,
           height: "8rem",
           width: "8rem",
           textAlign: "center",
@@ -35,13 +35,14 @@ export function createLetter(letter: Letter) {
           fontSize: "5rem",
           position: "relative",
         }}
-      >
+      ><Typography color="transparent" fontSize={'5rem'} lineHeight={"8rem"}  sx={{ textShadow: '1px 1px 1px #000, 0 0 0 #ddd, 1px 1px 1px #000'}}>
         {(letter?.value === "QU" ? "Qu" : letter.value) ?? ""}
+        </Typography>
         {letter.arrowTo && (
           <EastIcon
             fontSize="large"
             sx={{
-              color: "navy",
+              color: "primary.main",
               position: "absolute",
               minWidth: "5rem",
               minHeight: "5rem",

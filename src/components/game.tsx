@@ -224,37 +224,39 @@ export function Boggle() {
       <Grid2
         container
         spacing={1.5}
-        sx={{ backgroundColor: "white", width: "35rem", height: "35rem" }}
+        sx={{ backgroundColor: "secondary.main", width: "37rem", height: "37rem", padding: '1rem', borderRadius: '2rem' }}
       >
         {letterMatrix.flat().map((l) => createLetter(l))}
       </Grid2>
       <Stack>
         <Box>
-          <Button variant="contained" onClick={resetMatrix}>
+          <Button variant="contained" color="secondary" onClick={resetMatrix}>
             Reset
           </Button>
         </Box>
         <Stack
           direction="row"
           spacing="1rem"
-          sx={{ padding: "2rem", height: "4rem" }}
+          sx={{ paddingY: "2rem", height: "4rem" }}
         >
           <TextField
-            label="test"
+            color="secondary"
+            label="Word Check"
+            focused
             onChange={(event) => lookForMatch(event.target.value)}
           />
-          <Button variant="contained" onClick={checkWordOnMW}>
+          <Button variant="contained" color="secondary" onClick={checkWordOnMW} sx={{height: '3.5rem'}}>
             Submit
           </Button>
         </Stack>
-        <Box maxWidth={"32rem"}>
+        <Box maxWidth={"32rem"} >
           {didSubmit && (
             <List>
               {!!wordDefs.length ? (
                 wordDefs.map((def) => (
                   <>
-                    <ListItem sx={{ backgroundColor: "gray" }} disablePadding>
-                      <ListItemText>{def}</ListItemText>
+                    <ListItem sx={{ borderRadius: '1rem',color: 'secondary.contrastText', backgroundColor: "secondary.main", padding: '0.5rem' }} disablePadding>
+                      <ListItemText>{def[0].toUpperCase() + def.slice(1)}</ListItemText>
                     </ListItem>
                     <Divider />
                   </>
