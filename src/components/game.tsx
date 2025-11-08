@@ -65,6 +65,20 @@ export function Boggle() {
     setLetterMatrix(newLetterMatrix);
   };
 
+  const [hasResetOnce, setHasResetOnce] = useState<boolean>(false)
+  const onReset = () => {
+    if (!hasResetOnce){
+      setHasResetOnce(true);
+      return;
+    }
+    resetMatrix();
+    setHasResetOnce(false);
+  }
+
+  const onMouseLeaveReset = () => {
+    setHasResetOnce(false);
+  }
+
   /**
    * Returns a list of Indexes for the `phrase` that was searched for, starting at
    * `index` of the phrase, given index 0 of the phrase is at supplied (x, y)
@@ -233,8 +247,8 @@ export function Boggle() {
       </Box>
       <Grid2 container spacing={"2vmin"} height="10vh">
         <Box paddingY={"2vh"}>
-          <Button variant="contained" color="secondary" onClick={resetMatrix} sx={{width: '10vw', height: "5vh"}}>
-            Reset
+          <Button variant="contained" color={ !hasResetOnce ? "secondary" : "error"} onClick={onReset} onMouseLeave={onMouseLeaveReset} sx={{width: '10vw', height: "5vh"}}>
+            {hasResetOnce ? 'Sure?' : 'Reset'}
           </Button>
         </Box>
         <Stack
