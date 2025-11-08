@@ -220,24 +220,28 @@ export function Boggle() {
   };
 
   return (
-    <Stack direction="row" spacing="2rem" paddingX={"20rem"}>
-      <Grid2
-        container
-        spacing={1.5}
-        sx={{ backgroundColor: "secondary.main", width: "37rem", height: "37rem", padding: '1rem', borderRadius: '2rem' }}
-      >
-        {letterMatrix.flat().map((l) => createLetter(l))}
-      </Grid2>
-      <Stack>
-        <Box>
-          <Button variant="contained" color="secondary" onClick={resetMatrix}>
+    <Stack direction={{xs: "column", md:"row"}} spacing="4vw" paddingX="2vmin" >
+      <Box width={{xs:"80vmin", md: "60vmin"}} height={{xs:"80vmin", md: "60vmin"}} minWidth="60vmin">
+        <Grid2
+          container
+          spacing={"2vmin"}
+          columns={{ xs: 4, md: 12 }}
+          sx={{ backgroundColor: "secondary.main", padding: '2vmin', borderRadius: '4vmin' }}
+        >
+          {letterMatrix.flat().map((l) => createLetter(l))}
+        </Grid2>
+      </Box>
+      <Grid2 container spacing={"2vmin"} height="10vh">
+        <Box paddingY={"2vh"}>
+          <Button variant="contained" color="secondary" onClick={resetMatrix} sx={{width: '10vw', height: "5vh"}}>
             Reset
           </Button>
         </Box>
         <Stack
+          display={"flex"}
           direction="row"
-          spacing="1rem"
-          sx={{ paddingY: "2rem", height: "4rem" }}
+          spacing="1vmin"
+          sx={{ paddingY: "2vh", height: "4vh" }}
         >
           <TextField
             color="secondary"
@@ -245,11 +249,11 @@ export function Boggle() {
             focused
             onChange={(event) => lookForMatch(event.target.value)}
           />
-          <Button variant="contained" color="secondary" onClick={checkWordOnMW} sx={{height: '3.5rem'}}>
+          <Button variant="contained" color="secondary" onClick={checkWordOnMW} sx={{height: '5vh', width: '10vw'}}>
             Submit
           </Button>
         </Stack>
-        <Box maxWidth={"32rem"} >
+        <Box maxWidth={"25vmin"} >
           {didSubmit && (
             <List>
               {!!wordDefs.length ? (
@@ -271,7 +275,7 @@ export function Boggle() {
             </List>
           )}
         </Box>
-      </Stack>
+      </Grid2>
     </Stack>
   );
 }

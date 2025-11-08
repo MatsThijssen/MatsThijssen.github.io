@@ -20,22 +20,20 @@ function arrowRotation(x: number, y: number) {
  */
 export function createLetter(letter: Letter) {
   return (
-    <Grid2 size={{ xs: 3 }}>
+    <Grid2 size={{ xs: 0.99, md: 2.99 }}display="flex" justifyContent="center" alignItems="center"  >
       <Box
+      width={{xs:"16vmin", md: "12vmin"}}
+      height={{xs:"16vmin", md: "12vmin"}}
         sx={{
-          borderRadius: 5,
+          borderRadius: "20%",
           borderColor: "white",
           backgroundColor: "burlywood",
           boxShadow: `0px 0px 7px 12px inset ${letter.color ?? "bisque"}`,
-          height: "8rem",
-          width: "8rem",
           textAlign: "center",
           verticalAlign: "middle",
-          lineHeight: "8rem",
-          fontSize: "5rem",
           position: "relative",
         }}
-      ><Typography color="transparent" fontSize={'5rem'} lineHeight={"8rem"}  sx={{ textShadow: '1px 1px 1px #000, 0 0 0 #ddd, 1px 1px 1px #000'}}>
+      ><Typography color="transparent" fontSize={{xs:"10vmin", md: "8vmin"}} sx={{ textShadow: '1px 1px 1px #000, 0 0 0 #ddd, 1px 1px 1px #000'}}>
         {(letter?.value === "QU" ? "Qu" : letter.value) ?? ""}
         </Typography>
         {letter.arrowTo && (
@@ -44,10 +42,10 @@ export function createLetter(letter: Letter) {
             sx={{
               color: "primary.main",
               position: "absolute",
-              minWidth: "5rem",
-              minHeight: "5rem",
-              top: `${1.5 - letter.arrowTo.x * 4.5}rem`,
-              right: `${1.5 + letter.arrowTo.y * 4.5}rem`,
+              minWidth: {md: "10vmin", xs: '12vmin'},
+              minHeight: {md: "10vmin", xs: '12vmin'},
+              top: {md: `${1.5 - letter.arrowTo.x * 7.5}vmin`, xs: `${2.5 - letter.arrowTo.x * 9}vmin`},
+              right: {xs: `${2 + letter.arrowTo.y * 9}vmin`, md:`${1 + letter.arrowTo.y * 7.5}vmin`} ,
               zIndex: "999",
               rotate: `${arrowRotation(letter.arrowTo.x, letter.arrowTo.y)}deg`,
             }}

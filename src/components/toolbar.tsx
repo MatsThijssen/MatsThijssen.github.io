@@ -5,12 +5,12 @@ export function Toolbar() {
     <Box
     color='secondary.contrastText'
       sx={{
-        paddingX: "8rem",
-        paddingY: "1rem",
-        height: "4rem",
+        paddingX: "8vw",
+        paddingY: "2vh",
+        height: "8vh",
         width: "auto",
         backgroundColor: 'secondary.main',
-        marginBottom: "1rem",
+        marginBottom: "1vh",
       }}
     >
       <Typography variant="h2">Boggle.fun</Typography>
